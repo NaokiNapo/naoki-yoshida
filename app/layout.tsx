@@ -1,35 +1,57 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import { Noto_Sans_JP } from "next/font/google";
+import { site } from "../data/site";
 import "./globals.css";
 
+const notoSans = Noto_Sans_JP({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-noto",
+  preload: false,
+});
 export const metadata: Metadata = {
-  title: "Naoki Yoshida | Official Website",
-  description: "Naoki Yoshida's official website. Coming soon.",
-  applicationName: "Naoki Yoshida",
+  metadataBase: new URL(site.url),
+  title: site.title,
+  description: site.description,
+  applicationName: site.name,
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true },
   openGraph: {
-    title: "Naoki Yoshida | Official Website",
-    description: "Coming soon.",
-    siteName: "Naoki Yoshida",
+    title: site.title,
+    description: site.description,
+    url: site.url,
+    siteName: site.name,
     type: "website",
-    locale: "en_US",
+    locale: "ja_JP",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Naoki Yoshida — 仕事の悩みを、もっとシンプルに。",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
-    title: "Naoki Yoshida | Official Website",
-    description: "Coming soon.",
+    card: "summary_large_image",
+    title: site.title,
+    description: site.description,
+    images: ["/opengraph-image"],
   },
 };
-
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#080808",
-  colorScheme: "dark",
+  themeColor: "#f7f9fc",
+  colorScheme: "light",
 };
-
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="ja" className={notoSans.variable}>
       <body>{children}</body>
     </html>
   );
