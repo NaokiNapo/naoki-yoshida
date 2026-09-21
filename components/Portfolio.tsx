@@ -1,4 +1,4 @@
-import { portfolio } from "../data/portfolio";
+import { portfolio, portfolioCategories } from "../data/portfolio";
 import Icon from "./Icon";
 export default function Portfolio() {
   return (
@@ -79,6 +79,15 @@ export default function Portfolio() {
                 <br />
                 ご相談いただける内容は「お手伝いできること」をご覧ください。
               </p>
+              <p className="portfolio-category-label">掲載予定のカテゴリ</p>
+              <ul
+                className="tags portfolio-categories"
+                aria-label="掲載予定のカテゴリ"
+              >
+                {portfolioCategories.map((category) => (
+                  <li key={category}>{category}</li>
+                ))}
+              </ul>
               <a className="text-link" href="#services">
                 お手伝いできること
                 <Icon name="arrow" />

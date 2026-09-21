@@ -1450,3 +1450,12 @@ h1 > span {
     transform: none;
   }
 }
+
+.works-placeholder .portfolio-category-label {
+  margin: 20px 0 8px;
+  font-size: 11px;
+  color: #536a82;
+}
+.portfolio-categories {
+  margin-bottom: 14px;
+}
