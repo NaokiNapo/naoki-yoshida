@@ -1,3 +1,4 @@
+import { copy } from "../data/copy";
 import Icon from "./Icon";
 export default function Hero() {
   return (
@@ -5,20 +6,21 @@ export default function Hero() {
       <div className="hero-copy">
         <p className="hero-label">
           <span />
-          NAOKI YOSHIDA<span className="hero-role">Freelance Engineer</span>
+          NAOKI YOSHIDA<span className="hero-role">{copy["TXT-006"]}</span>
         </p>
         <h1 id="hero-heading">
-          仕事の悩みを、
-          <br />
-          <span>もっとシンプルに。</span>
+          {copy["TXT-007"]
+            .split("\n")
+            .flatMap((line, index) =>
+              index === 0 ? [line] : line.split(/(?<=、)/),
+            )
+            .map((line) => (
+              <span className="hero-headline-line" key={line}>
+                {line}
+              </span>
+            ))}
         </h1>
-        <p className="hero-lead">
-          AIを使ってみたい。
-          <br />
-          繰り返し作業を減らしたい。
-          <br />
-          ホームページやSNSをもっと活かしたい。
-        </p>
+        <p className="hero-lead">{copy["TXT-008"]}</p>
         <p className="hero-description">
           そんな「どうしたらいい？」から、
           <br />
@@ -64,7 +66,7 @@ export default function Hero() {
         </svg>
         <div className="floating-note note-top">
           <Icon name="chat" />
-          <span>「どうしたらいい？」</span>
+          <span>{copy["TXT-012"]}</span>
           <span className="note-dot" />
         </div>
         <div className="core-glass">
@@ -73,18 +75,14 @@ export default function Hero() {
             <span />
             <span />
           </div>
-          <span className="core-overline">THINK TOGETHER</span>
-          <strong>
-            一緒に考える。
-            <br />
-            形にする。
-          </strong>
+          <span className="core-overline">{copy["TXT-013"]}</span>
+          <strong>{copy["TXT-014"]}</strong>
           <div className="core-line" />
           <small>小さな相談から、次の一歩へ。</small>
         </div>
         <div className="floating-note note-bottom">
           <span className="note-check">✓</span>
-          <span>仕事が、少し軽くなる。</span>
+          <span>{copy["TXT-016"]}</span>
         </div>
         <span className="art-caption">A LITTLE SIMPLER. A LITTLE BETTER.</span>
       </div>

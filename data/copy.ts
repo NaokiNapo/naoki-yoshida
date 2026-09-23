@@ -1,0 +1,20 @@
+export const copy = {
+  "TXT-006": "Freelance Engineer / Consultant",
+  "TXT-007": "AIとシステムで、\n仕事をもっとラクに、もっとシンプルに。",
+  "TXT-008":
+    "AIを、仕事にうまく取り入れてみたい。\n日々の仕事を、もう少しラクにしたい。\nホームページやSNSを、もっと活かしたい。",
+  "TXT-012": "「仕事をラクにしたい。」",
+  "TXT-013": "WORK SMARTER",
+  "TXT-014": "面倒な作業を、\nもっとシンプルに。",
+  "TXT-016": "仕事がシンプルになる。",
+  "TXT-093": "AI Utilization",
+  "TXT-094": "Web Development",
+  "TXT-095": "Automation",
+  "TXT-096": "Data Analysis",
+  "TXT-097": "BI / Dashboard",
+  "TXT-107": "Freelance Engineer / Consultant",
+  "TXT-109": "はじめまして、Naoki Yoshidaです。",
+  "TXT-119": "ChatGPT / OpenAI API / Claude Code / Copilot / Gemini",
+  "TXT-121": "SQL / Python / Tableau / Supabase",
+  "TXT-123": "Next.js / TypeScript / Vercel",
+} as const;

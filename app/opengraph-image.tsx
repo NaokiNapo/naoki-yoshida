@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
-export const alt = "Naoki Yoshida — AI・自動化・Webの相談と制作";
+export const alt =
+  "Naoki Yoshida — AIとシステムで、仕事をもっとラクに、もっとシンプルに。";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export default function OpenGraphImage() {
@@ -24,13 +25,13 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           marginTop: 48,
-          fontSize: 76,
+          fontSize: 70,
           fontWeight: 700,
           lineHeight: 1.18,
         }}
       >
-        <span>Think together.</span>
-        <span style={{ color: "#376c9f" }}>Make it simpler.</span>
+        <span>WORK SMARTER.</span>
+        <span style={{ color: "#376c9f" }}>MAKE IT SIMPLER.</span>
       </div>
       <div
         style={{
@@ -51,7 +52,7 @@ export default function OpenGraphImage() {
           fontSize: 18,
         }}
       >
-        Freelance Engineer / Technology Partner
+        Freelance Engineer / Consultant
       </div>
     </div>,
     size,

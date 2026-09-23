@@ -1,3 +1,4 @@
+import { copy } from "./copy";
 export type PortfolioItem = {
   id: string;
   category: string;
@@ -15,9 +16,9 @@ export const portfolio: PortfolioItem[] = [];
 
 // 仮の分類ラベルです。実在する案件や成果を示すものではありません。
 export const portfolioCategories = [
-  "BI / Dashboard",
-  "Data Analysis",
-  "Automation",
-  "Web Development",
-  "AI Utilization",
+  copy["TXT-093"],
+  copy["TXT-094"],
+  copy["TXT-095"],
+  copy["TXT-096"],
+  copy["TXT-097"],
 ] as const;

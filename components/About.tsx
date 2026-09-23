@@ -1,3 +1,4 @@
+import { copy } from "../data/copy";
 export default function About() {
   return (
     <section
@@ -13,7 +14,7 @@ export default function About() {
             <div className="monogram-orbit" />
           </div>
           <p className="about-name">Naoki Yoshida</p>
-          <p className="about-role">Freelance Engineer / Technology Partner</p>
+          <p className="about-role">{copy["TXT-107"]}</p>
         </div>
         <div className="about-copy">
           <h2 id="about-heading">
@@ -23,7 +24,7 @@ export default function About() {
             <br />
             一緒に考えます。
           </h2>
-          <p>はじめまして、吉田尚起です。</p>
+          <p>{copy["TXT-109"]}</p>
           <p>
             データ分析やBI、Web制作、AI活用など、
             <br className="desktop-break" />

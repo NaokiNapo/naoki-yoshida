@@ -1,3 +1,4 @@
+import MotionEffects from "../components/MotionEffects";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Problems from "../components/Problems";
@@ -16,6 +17,7 @@ export default function Home() {
         本文へスキップ
       </a>
       <Header />
+      <MotionEffects />
       <main id="main-content">
         <div id="top" />
         <Hero />

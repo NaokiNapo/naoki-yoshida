@@ -64,36 +64,54 @@ export default function Portfolio() {
             ))}
           </div>
         ) : (
-          <div className="works-placeholder">
-            <div className="works-placeholder-art" aria-hidden="true">
-              <span />
-              <span />
-              <span />
-              <Icon name="web" />
-            </div>
-            <div>
-              <span className="status-label">IN PREPARATION</span>
+          <>
+            <div className="works-notice">
+              <span className="preparation-badge">
+                実績は、ただいま掲載準備中です
+              </span>
               <h3>公開できる事例を、準備しています。</h3>
               <p>
                 掲載内容を確認のうえ、順次ご紹介します。
                 <br />
                 ご相談いただける内容は「お手伝いできること」をご覧ください。
               </p>
-              <p className="portfolio-category-label">掲載予定のカテゴリ</p>
-              <ul
-                className="tags portfolio-categories"
-                aria-label="掲載予定のカテゴリ"
-              >
-                {portfolioCategories.map((category) => (
-                  <li key={category}>{category}</li>
-                ))}
-              </ul>
-              <a className="text-link" href="#services">
+              <a href="#services" className="text-link">
                 お手伝いできること
                 <Icon name="arrow" />
               </a>
             </div>
-          </div>
+            <p className="portfolio-category-label">掲載予定のカテゴリ</p>
+            <div className="work-placeholder-grid">
+              {portfolioCategories.map((category) => (
+                <article
+                  className="work-placeholder-card"
+                  key={category}
+                  aria-label={`${category}：掲載準備中`}
+                >
+                  <div className="placeholder-visual" aria-hidden="true">
+                    <span />
+                    <span />
+                    <span />
+                    <div className="skeleton-chart">
+                      <i />
+                      <i />
+                      <i />
+                      <i />
+                      <i />
+                    </div>
+                  </div>
+                  <h3>{category}</h3>
+                  <div className="skeleton-lines" aria-hidden="true">
+                    <span />
+                    <span />
+                  </div>
+                  <span className="coming-soon">
+                    COMING SOON <small>掲載準備中</small>
+                  </span>
+                </article>
+              ))}
+            </div>
+          </>
         )}
       </div>
     </section>

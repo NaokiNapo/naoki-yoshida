@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "lint": "npx --yes @biomejs/biome@2.5.14 lint app components data"
+    "lint": "npx --yes @biomejs/biome@2.5.14 lint app components data lib tests",
+    "test": "node --experimental-strip-types --test tests/*.test.ts"
   },
   "engines": {
     "node": "24.x"

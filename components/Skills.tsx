@@ -1,7 +1,11 @@
+import { copy } from "../data/copy";
 const tools = [
-  { label: "AI", items: "ChatGPT / OpenAI API" },
-  { label: "Data", items: "SQL / Python / Tableau" },
-  { label: "Web", items: "Next.js / TypeScript / Supabase / Vercel" },
+  {
+    label: "AI",
+    items: copy["TXT-119"],
+  },
+  { label: "Data", items: copy["TXT-121"] },
+  { label: "Web", items: copy["TXT-123"] },
   { label: "Cloud / Others", items: "AWS / GitHub" },
 ];
 export default function Skills() {
