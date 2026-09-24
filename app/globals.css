@@ -1499,33 +1499,166 @@ h1 > span {
 .copy-lines {
   white-space: pre-line;
 }
+/* Hero entry and ambient transform are independent of scroll/pointer translate. */
+.hero-art .orb,
+.core-symbol {
+  animation: none;
+}
 .hero-art .orb-one {
-  translate: var(--motion-x, 0px) var(--motion-y, 0px);
+  translate: calc(var(--motion-x, 0px) * 0.5 + var(--pointer-x, 0px) * 0.5)
+    calc(var(--motion-y, 0px) * 0.5 + var(--pointer-y, 0px) * 0.5);
 }
 .hero-art .orb-two {
-  translate: calc(var(--motion-x, 0px) * -1) calc(var(--motion-y, 0px) * -0.7);
+  translate: calc(var(--motion-x, 0px) * -0.4) calc(var(--motion-y, 0px) * -0.4);
 }
 .hero-art .core-glass {
-  translate: 0 calc(var(--motion-y, 0px) * 0.35);
-  animation: glass-float 9s ease-in-out infinite alternate;
+  --rest-rotation: -5deg;
+  translate: var(--pointer-x, 0px)
+    calc(var(--motion-y, 0px) * -0.5 + var(--pointer-y, 0px));
+  animation:
+    hero-enter 700ms ease-out 300ms backwards,
+    glass-float 12s ease-in-out 1s infinite;
 }
 .hero-art .note-top {
-  translate: 0 calc(var(--motion-y, 0px) * -0.65);
-  animation: note-float 8s ease-in-out infinite alternate;
+  --rest-rotation: -7deg;
+  translate: calc(var(--motion-x, 0px) * -0.4)
+    calc(var(--motion-y, 0px) * -0.65);
+  animation:
+    hero-enter 650ms ease-out 800ms backwards,
+    note-float 10s ease-in-out 1450ms infinite;
 }
 .hero-art .note-bottom {
-  translate: 0 calc(var(--motion-y, 0px) * 0.8);
-  animation: note-float 11s ease-in-out -4s infinite alternate-reverse;
+  --rest-rotation: 5deg;
+  translate: 0 calc(var(--motion-y, 0px) * 0.5);
+  animation: hero-enter 650ms ease-out 1400ms backwards;
 }
-.orbit-lines {
-  animation: orbit-drift 24s ease-in-out infinite alternate;
-  transform-origin: center;
+.orbit-layer,
+.orbit-points {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  translate: calc(var(--motion-x, 0px) * 0.7 + var(--pointer-x, 0px) * 0.3)
+    calc(var(--motion-y, 0px) * 0.7);
+}
+.orbit-layer {
+  animation: orbit-drift 32s ease-in-out 1800ms infinite;
+  transform-origin: 50% 50%;
+}
+.orbit-points {
+  animation: hero-enter 600ms ease-out 1800ms backwards;
+}
+.orbit-track {
+  position: absolute;
+  width: 76%;
+  aspect-ratio: 1;
+  left: 12%;
+  top: 12%;
+  transform: rotate(var(--phase));
+  animation: dot-orbit var(--period) linear 1800ms infinite;
+}
+.track-one {
+  --phase: -45deg;
+  --period: 28s;
+}
+.track-two {
+  --phase: 145deg;
+  --period: 37s;
+  width: 64%;
+  left: 18%;
+  top: 18%;
+  animation-direction: reverse;
+}
+.orbit-track > span {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #729cb9;
+  opacity: 0.7;
+  box-shadow: 0 0 5px rgb(114 156 185 / 0.15);
+}
+.track-two > span {
+  width: 3px;
+  height: 3px;
+  background: #9c95be;
+  opacity: 0.5;
 }
 .art-grid {
-  translate: calc(var(--motion-x, 0px) * 0.2) calc(var(--motion-y, 0px) * -0.25);
+  translate: none;
 }
-.core-symbol {
-  animation: symbol-tilt 12s ease-in-out infinite alternate;
+.core-line {
+  position: relative;
+  overflow: hidden;
+}
+.core-line::after {
+  content: "";
+  position: absolute;
+  inset: -1px auto -1px 0;
+  width: 5px;
+  background: #729cb9;
+  opacity: 0;
+  animation: information-flow 8s ease-in-out 2s infinite;
+}
+.hero-art[data-motion-paused="true"] *,
+.hero-art[data-motion-paused="true"] *::after {
+  animation-play-state: paused;
+}
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translate(-8px, 12px) scale(0.96)
+      rotate(var(--rest-rotation, 0deg));
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(var(--rest-rotation, 0deg));
+  }
+}
+@keyframes dot-orbit {
+  from {
+    transform: rotate(var(--phase));
+  }
+  to {
+    transform: rotate(calc(var(--phase) + 360deg));
+  }
+}
+@keyframes information-flow {
+  0%,
+  65%,
+  100% {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  70% {
+    opacity: 0.6;
+    transform: translateX(-6px);
+  }
+  90% {
+    opacity: 0.6;
+    transform: translateX(30px);
+  }
+  91% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}
+@media (max-width: 1023px) {
+  .hero-art .note-top {
+    animation: hero-enter 650ms ease-out 800ms backwards;
+  }
+  .orbit-layer,
+  .core-line::after {
+    animation: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-art *,
+  .hero-art *::after {
+    animation: none !important;
+    translate: none !important;
+  }
 }
 [data-reveal] {
   transition:
@@ -1591,40 +1724,29 @@ h1 > span {
   transform: rotate(-6deg) translateY(-2px);
 }
 @keyframes glass-float {
-  from {
-    transform: translateY(-3px) rotate(-5deg);
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(-5deg);
   }
-  to {
-    transform: translateY(4px) rotate(-3deg);
+  50% {
+    transform: translate(2px, -6px) rotate(-4.2deg);
   }
-}
-.note-top {
-  --note-rotation: -7deg;
-}
-.note-bottom {
-  --note-rotation: 5deg;
 }
 @keyframes note-float {
-  from {
-    transform: translateY(-3px) rotate(var(--note-rotation));
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(-7deg);
   }
-  to {
-    transform: translateY(3px) rotate(var(--note-rotation));
+  50% {
+    transform: translate(-2px, 4px) rotate(-7deg);
   }
 }
 @keyframes orbit-drift {
-  from {
-    transform: rotate(-7deg) scale(0.94);
+  0%,
+  100% {
+    transform: rotate(0deg);
   }
-  to {
-    transform: rotate(7deg) scale(1);
-  }
-}
-@keyframes symbol-tilt {
-  from {
-    transform: rotate(-5deg);
-  }
-  to {
+  50% {
     transform: rotate(8deg);
   }
 }

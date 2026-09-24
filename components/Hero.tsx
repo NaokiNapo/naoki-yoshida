@@ -40,30 +40,38 @@ export default function Hero() {
         <div className="art-grid" />
         <div className="orb orb-one" />
         <div className="orb orb-two" />
-        <svg
-          aria-hidden="true"
-          className="orbit-lines"
-          viewBox="0 0 520 540"
-          fill="none"
-        >
-          <ellipse
-            cx="262"
-            cy="266"
-            rx="200"
-            ry="179"
-            transform="rotate(-35 262 266)"
-          />
-          <ellipse
-            cx="262"
-            cy="266"
-            rx="164"
-            ry="220"
-            transform="rotate(-35 262 266)"
-          />
-          <path d="M73 152C271 97 214 421 442 361" />
-          <circle cx="125" cy="397" r="4" />
-          <circle cx="450" cy="210" r="4" />
-        </svg>
+        <div className="orbit-layer">
+          <svg
+            aria-hidden="true"
+            className="orbit-lines"
+            viewBox="0 0 520 540"
+            fill="none"
+          >
+            <ellipse
+              cx="262"
+              cy="266"
+              rx="200"
+              ry="179"
+              transform="rotate(-35 262 266)"
+            />
+            <ellipse
+              cx="262"
+              cy="266"
+              rx="164"
+              ry="220"
+              transform="rotate(-35 262 266)"
+            />
+            <path d="M73 152C271 97 214 421 442 361" />
+          </svg>
+        </div>
+        <div className="orbit-points">
+          <span className="orbit-track track-one">
+            <span />
+          </span>
+          <span className="orbit-track track-two">
+            <span />
+          </span>
+        </div>
         <div className="floating-note note-top">
           <Icon name="chat" />
           <span>{copy["TXT-012"]}</span>

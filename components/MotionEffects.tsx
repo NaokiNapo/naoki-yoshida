@@ -42,11 +42,34 @@ export default function MotionEffects() {
         ),
       ];
       const active = new Set<HTMLElement>();
+      const hero = document.querySelector<HTMLElement>(".hero-art");
+      const desktop = window.matchMedia(
+        "(min-width: 1024px) and (hover: hover) and (pointer: fine)",
+      );
+      let pointerX = 0;
+      let pointerY = 0;
       let frame = 0;
       const render = () => {
         frame = 0;
         for (const element of active) {
           const rect = element.getBoundingClientRect();
+          if (element === hero && !desktop.matches) {
+            element.style.setProperty("--motion-x", "0px");
+            element.style.setProperty("--motion-y", "0px");
+            element.style.setProperty("--pointer-x", "0px");
+            element.style.setProperty("--pointer-y", "0px");
+            continue;
+          }
+          if (element === hero) {
+            element.style.setProperty(
+              "--pointer-x",
+              `${pointerX.toFixed(2)}px`,
+            );
+            element.style.setProperty(
+              "--pointer-y",
+              `${pointerY.toFixed(2)}px`,
+            );
+          }
           const progress = Math.max(
             -1,
             Math.min(
@@ -67,9 +90,34 @@ export default function MotionEffects() {
       const schedule = () => {
         if (!frame) frame = requestAnimationFrame(render);
       };
+      const onPointer = (event: PointerEvent) => {
+        if (!hero || !desktop.matches || !active.has(hero)) return;
+        const rect = hero.getBoundingClientRect();
+        pointerX =
+          Math.max(
+            -1,
+            Math.min(1, ((event.clientX - rect.left) / rect.width) * 2 - 1),
+          ) * 3;
+        pointerY =
+          Math.max(
+            -1,
+            Math.min(1, ((event.clientY - rect.top) / rect.height) * 2 - 1),
+          ) * 3;
+        schedule();
+      };
+      const resetPointer = () => {
+        pointerX = 0;
+        pointerY = 0;
+        schedule();
+      };
+      hero?.addEventListener("pointermove", onPointer, { passive: true });
+      hero?.addEventListener("pointerleave", resetPointer);
+      desktop.addEventListener("change", resetPointer);
       const sceneObserver = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
+            if (entry.target === hero)
+              hero.dataset.motionPaused = String(!entry.isIntersecting);
             if (entry.isIntersecting) active.add(entry.target as HTMLElement);
             else active.delete(entry.target as HTMLElement);
           }
@@ -93,6 +141,10 @@ export default function MotionEffects() {
       window.addEventListener("resize", schedule, { passive: true });
       document.addEventListener("focusin", onFocus);
       dispose = () => {
+        hero?.removeEventListener("pointermove", onPointer);
+        hero?.removeEventListener("pointerleave", resetPointer);
+        desktop.removeEventListener("change", resetPointer);
+        if (hero) delete hero.dataset.motionPaused;
         observer.disconnect();
         sceneObserver.disconnect();
         window.removeEventListener("scroll", schedule);
@@ -106,6 +158,8 @@ export default function MotionEffects() {
         for (const scene of scenes) {
           scene.style.removeProperty("--motion-y");
           scene.style.removeProperty("--motion-x");
+          scene.style.removeProperty("--pointer-x");
+          scene.style.removeProperty("--pointer-y");
         }
       };
     };
