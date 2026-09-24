@@ -1,8 +1,8 @@
 # Naoki Yoshida
 
 AI・自動化・Web・データに関する相談と制作のホームページ。
-Next.js / TypeScript / App Router。既存のVercelプロジェクトと
-https://naoki-yoshida.vercel.app を維持します。
+Next.js / TypeScript / App Router。既存のVercelプロジェクトを使用し、
+正式な本番URLは https://yoshida-naoki.com です。
 
 ## 開発と検証
 
@@ -120,7 +120,11 @@ Resendの`onboarding@resend.dev`はテスト用です。
 
 GitHubの`feature/homepage-v1`をpushすると、既存のVercel Git連携でPreviewが作成されます。
 Vercel → 既存プロジェクト → Deployments → ブランチの最新コミット → Ready → Visitで確認できます。
-本番URL・SEOのcanonicalは既存URLを維持しています。
+本番URL・SEOのcanonicalは https://yoshida-naoki.com に統一しています。
+`data/site.ts`のURLをmetadataBase・Open Graph・sitemap・robotsが参照し、SNS共有画像も同じドメインで解決します。
+
+旧URL https://naoki-yoshida.vercel.app と https://www.yoshida-naoki.com は、
+Vercel側の308リダイレクトで正式URLへ転送します。Next.js側には重複するHost Redirectを追加しません。
 
 ## 主な構成
 

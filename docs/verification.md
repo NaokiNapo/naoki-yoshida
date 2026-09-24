@@ -43,10 +43,11 @@ production build on 127.0.0.1:3001.
 
 All returned HTTP 200: /, /icon.svg, /opengraph-image, /robots.txt, /sitemap.xml.
 
-- canonical: https://naoki-yoshida.vercel.app/
+- 当時のcanonical（旧URL）: https://naoki-yoshida.vercel.app/
+  現在の正式URL・canonical: https://yoshida-naoki.com/
 - robots metadata: index, follow
 - Twitter card: summary_large_image
-- OGP image uses the existing production hostname.
+- OGP image used the production hostname at the time of this historical verification; the current hostname is yoshida-naoki.com.
 - Font loading completed successfully.
 
 Local, unthrottled browser sample: LCP 188ms, FCP 188ms, CLS 0, TTFB 3.8ms.
